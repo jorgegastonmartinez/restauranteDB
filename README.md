@@ -82,6 +82,171 @@ Este modelo permite centralizar toda la información operativa clave en una úni
 
 Se utilizarán claves primarias, foráneas y relaciones entre tablas para asegurar la integridad de los datos.
 
+
+
+
+## Tablas
+
+Tabla: empleados
+
+Almacena los datos del personal del restaurante. Cada empleado tiene asignado un rol operativo (salón, cocina o administración), además de un número de documento único y una fecha de ingreso al establecimiento. También se controla si el empleado está activo o no.
+
+id_empleado: clave primaria, se autoincrementa
+dni: tiene restricción UNIQUE para evitar duplicados
+rol: restringido a los tres tipos definidos
+activo: por defecto es TRUE
+clave_acceso: NOT NULL
+
+
+Tabla: fichajes
+
+id_fichaje: identificador único del registro de asistencia.
+id_empleado: clave foránea que conecta con la tabla Empleados.
+fecha: indica el día del fichaje.
+hora_ingreso: hora exacta en que el empleado fichó.
+hora_egreso puede quedar NULL si el empleado aún no egresó 
+
+Tabla proveedores
+
+id_proveedor: identificador único del proveedor.
+→ Clave primaria (PRIMARY KEY) de la tabla.
+nombre: nombre del proveedor o empresa proveedora.
+→ Campo obligatorio.
+telefono: número de contacto (opcional).
+email: correo electrónico del proveedor (opcional).
+
+
+
+Tabla productos
+
+id_producto: identificador único del producto.
+→ Clave primaria (PRIMARY KEY).
+
+nombre: nombre del producto o insumo (ej: tomate, pollo, aceite).
+→ Campo obligatorio.
+
+unidad_medida: unidad en la que se mide el producto (kg, litros, unidades, etc.).
+→ Campo obligatorio para control del inventario.
+
+id_proveedor: referencia al proveedor que suministra el producto.
+→ Clave foránea (FOREIGN KEY) que enlaza con proveedores(id_proveedor).
+
+
+
+Tabla inventario
+
+id_inventario: identificador único del registro de inventario.
+→ Clave primaria (PRIMARY KEY).
+
+id_producto: referencia al producto cuyo stock se está registrando.
+→ Clave foránea (FOREIGN KEY) vinculada a productos(id_producto).
+
+mes: mes y año del registro en formato AAAA-MM (ejemplo: '2025-08').
+→ Campo obligatorio para diferenciar inventarios mensuales.
+
+cantidad: cantidad disponible del producto en ese mes.
+→ Campo obligatorio, puede tener decimales para mayor precisión.
+
+Restricción única: combinación de id_producto y mes para evitar duplicados en el mismo período.
+
+
+
+
+
+Tabla ventas
+
+    id_venta: identificador único de la venta.
+    → Clave primaria (PRIMARY KEY).
+
+    fecha: fecha en que se realizó la venta.
+    → Campo obligatorio.
+
+    turno: turno de la venta, con los valores permitidos: desayuno, almuerzo o merienda.
+    → Campo obligatorio.
+
+    total: monto total de la venta en moneda local.
+    → Campo obligatorio.
+
+
+
+Tabla productos_vendidos
+
+id_producto_vendido: identificador único del ítem vendido.
+→ Clave primaria (PRIMARY KEY).
+
+id_venta: referencia a la venta asociada.
+→ Clave foránea (FOREIGN KEY) que se relaciona con ventas(id_venta).
+
+id_producto: producto que fue vendido.
+→ Clave foránea (FOREIGN KEY) que se relaciona con productos(id_producto).
+
+cantidad: cantidad de unidades vendidas del producto.
+→ Campo obligatorio.
+
+precio_unitario: precio unitario del producto al momento de la venta.
+→ Campo obligatorio. Esto te permite mantener un historial de precios aunque el valor cambie en el futuro.
+
+
+
+Tabla mermas
+La tabla mermas te va a permitir registrar pérdidas de productos por razones como vencimiento, mala manipulación, rotura, etc. Esto es clave para llevar un buen control del inventario.
+
+    id_merma: identificador único de la merma.
+    → Clave primaria (PRIMARY KEY).
+
+    id_producto: producto afectado por la merma.
+    → Clave foránea (FOREIGN KEY) que se relaciona con productos(id_producto).
+
+    fecha: fecha en que se registró la merma.
+    → Campo obligatorio.
+
+    cantidad: cantidad del producto descartada.
+    → Puede tener decimales.
+
+    motivo: razón de la merma (opcional pero recomendable). Ejemplos: "producto vencido", "rotura", "sobrante no reutilizable", etc.
+
+
+
+tabla compras_proveedor
+
+id_compra: ID único de la compra.
+
+id_proveedor: clave foránea del proveedor.
+
+nro_factura: número o código de la factura.
+
+fecha: fecha de emisión de la factura.
+
+importe_total: suma total de la factura.
+
+metodo_pago: puede ser "efectivo", "transferencia", "tarjeta", etc. (opcional).
+
+
+
+tabla detalle_compras_proveedor
+
+id_detalle: identificador del ítem.
+
+id_compra: clave foránea que se relaciona con compras.
+
+id_producto: producto comprado.
+
+cantidad: cantidad adquirida.
+
+precio_unitario: precio por unidad de ese producto.
+
+
+
+
+tabla productos_venta
+id_producto_venta PRIMARY KEY
+nombre: Nombre del producto que se ofrece al cliente
+descripcion	Detalles adicionales 
+precio_venta Precio final al cliente
+unidad_venta Cómo se vende: "unidad", "porción", "vaso", etc.
+activo	BOOLEAN	Indica si está disponible en el menú
+
+
 ## Imagenes del proyecto
 
 Vista de.......
