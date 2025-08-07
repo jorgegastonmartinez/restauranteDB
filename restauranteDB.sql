@@ -118,3 +118,32 @@ CREATE TABLE productos_venta (
     activo BOOLEAN DEFAULT TRUE
 );
 
+
+
+CREATE TABLE recetas (
+    id_receta INT AUTO_INCREMENT PRIMARY KEY,
+    id_producto_venta INT NOT NULL,
+    descripcion TEXT,
+    FOREIGN KEY (id_producto_venta) REFERENCES productos_venta(id_producto_venta)
+);
+
+
+
+CREATE TABLE detalle_receta (
+    id_detalle INT AUTO_INCREMENT PRIMARY KEY,
+    id_receta INT NOT NULL,
+    id_producto INT NOT NULL,
+    cantidad DECIMAL(10,2) NOT NULL,
+    unidad_medida VARCHAR(20),
+    FOREIGN KEY (id_receta) REFERENCES recetas(id_receta),
+    FOREIGN KEY (id_producto) REFERENCES productos(id_producto)
+);
+
+
+
+
+
+
+
+
+

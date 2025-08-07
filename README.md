@@ -247,6 +247,36 @@ unidad_venta Cómo se vende: "unidad", "porción", "vaso", etc.
 activo	BOOLEAN	Indica si está disponible en el menú
 
 
+
+
+Tabla recetas
+
+    id_receta: identificador único de la receta.
+    → Clave primaria.
+
+    id_producto_venta: referencia al producto que se elabora con esta receta (ej. milanesa con papas).
+    → Clave foránea a productos_venta(id_producto_venta).
+
+    descripcion: texto opcional para describir preparación, pasos, aclaraciones, etc.
+
+
+
+Tabla detalle_receta
+
+id_detalle: identificador único del ingrediente dentro de la receta.
+→ Clave primaria.
+
+id_receta: identifica a qué receta pertenece ese ingrediente.
+→ Clave foránea a recetas(id_receta).
+
+id_producto: producto del inventario que se utiliza como ingrediente.
+→ Clave foránea a productos(id_producto).
+
+cantidad: cantidad utilizada para 1 unidad del producto de venta.
+
+unidad_medida: libre, por ejemplo: "g", "ml", "unidad", "cucharada", etc.
+
+
 ## Imagenes del proyecto
 
 Vista de.......
