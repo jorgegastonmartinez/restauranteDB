@@ -290,9 +290,7 @@ Vista de.......
 
 ## Links a los detalles
 
-Vista de diagrama entidad relacion ER
-
-![](./Captura%20de%20pantalla%202025-08-08%20a%20la(s)%2012.40.54.png)
+[Diagrama Entidad-Relacion ER](./Captura%20de%20pantalla%202025-08-08%20a%20la(s)%2012.40.54.png)
 
 
 
