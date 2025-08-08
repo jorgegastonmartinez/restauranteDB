@@ -1,5 +1,6 @@
 # Título del Proyecto
 
+RestauranteDB
 
 
 # Autor
@@ -7,22 +8,17 @@
 Jorge Martinez.
 
 
-## Curso
+# Curso
 Backend 
 
-## Comisión
+
+# Comisión
 81830
-
-# Documentación
-
-* 
-* 
 
 
 # Sobre mi proyecto
 
 Este proyecto tiene como finalidad el diseño y desarrollo de una base de datos relacional orientada a la gestión operativa de un restaurante. Se enfoca en organizar y centralizar información clave vinculada al personal, control de inventario, proveedores y registro de asistencia, permitiendo así una administración más eficiente de los recursos internos del establecimiento. A través de un modelo estructurado, se busca reflejar los procesos reales que se dan en la operación diaria del restaurante.
-
 
 
 # Objetivo
@@ -40,7 +36,6 @@ El objetivo del proyecto es construir una base de datos relacional que centralic
 * Mermas: cargar los desperdicios o pérdidas de productos, insumos o preparaciones, con el fin de identificar puntos críticos y optimizar costos operativos.
 
 El sistema está diseñado para ofrecer una visión integrada de la operación, permitiendo mejorar la eficiencia interna, reducir pérdidas, y generar información útil para áreas contables, logísticas y analíticas.
-
 
 
 # Situación Problemática
@@ -131,32 +126,32 @@ Almacena los datos del personal del restaurante. Cada empleado tiene asignado un
 ### Tabla productos
 
     id_producto: identificador único del producto.
-    → Clave primaria (PRIMARY KEY).
+    Clave primaria.
 
     nombre: nombre del producto o insumo (ej: tomate, pollo, aceite).
-    → Campo obligatorio.
+    Campo obligatorio.
 
     unidad_medida: unidad en la que se mide el producto (kg, litros, unidades, etc.).
-    → Campo obligatorio para control del inventario.
+    Campo obligatorio para control del inventario.
 
     id_proveedor: referencia al proveedor que suministra el producto.
-    → Clave foránea (FOREIGN KEY) que enlaza con proveedores(id_proveedor).
+    Clave foránea que enlaza con proveedores(id_proveedor).
 
 
 
 ### Tabla inventario
 
     id_inventario: identificador único del registro de inventario.
-    → Clave primaria (PRIMARY KEY).
+    Clave primaria (PRIMARY KEY).
 
     id_producto: referencia al producto cuyo stock se está registrando.
-    → Clave foránea (FOREIGN KEY) vinculada a productos(id_producto).
+    Clave foránea vinculada a productos(id_producto).
 
     mes: mes y año del registro en formato AAAA-MM (ejemplo: '2025-08').
-    → Campo obligatorio para diferenciar inventarios mensuales.
+    Campo obligatorio para diferenciar inventarios mensuales.
 
     cantidad: cantidad disponible del producto en ese mes.
-    → Campo obligatorio, puede tener decimales para mayor precisión.
+    Campo obligatorio, puede tener decimales para mayor precisión.
 
     Restricción única: combinación de id_producto y mes para evitar duplicados en el mismo período.
 
@@ -164,35 +159,35 @@ Almacena los datos del personal del restaurante. Cada empleado tiene asignado un
 ### Tabla ventas
 
     id_venta: identificador único de la venta.
-    → Clave primaria (PRIMARY KEY).
+    Clave primaria.
 
     fecha: fecha en que se realizó la venta.
-    → Campo obligatorio.
+    Campo obligatorio.
 
     turno: turno de la venta, con los valores permitidos: desayuno, almuerzo o merienda.
-    → Campo obligatorio.
+    Campo obligatorio.
 
     total: monto total de la venta en moneda local.
-    → Campo obligatorio.
+    Campo obligatorio.
 
 
 
 ### Tabla productos_vendidos
 
     id_producto_vendido: identificador único del ítem vendido.
-    → Clave primaria (PRIMARY KEY).
+    Clave primaria.
 
     id_venta: referencia a la venta asociada.
-    → Clave foránea (FOREIGN KEY) que se relaciona con ventas(id_venta).
+    Clave foránea que se relaciona con ventas(id_venta).
 
     id_producto: producto que fue vendido.
-    → Clave foránea (FOREIGN KEY) que se relaciona con productos(id_producto).
+    Clave foránea que se relaciona con productos(id_producto).
 
     cantidad: cantidad de unidades vendidas del producto.
-    → Campo obligatorio.
+    Campo obligatorio.
 
     precio_unitario: precio unitario del producto al momento de la venta.
-    → Campo obligatorio. Esto te permite mantener un historial de precios aunque el valor cambie en el futuro.
+    Campo obligatorio. Esto te permite mantener un historial de precios aunque el valor cambie en el futuro.
 
 
 
@@ -200,24 +195,24 @@ Almacena los datos del personal del restaurante. Cada empleado tiene asignado un
 La tabla mermas permite registrar pérdidas de productos por razones como vencimiento, mala manipulación, rotura, etc. Esto es clave para llevar un buen control del inventario.
 
     id_merma: identificador único de la merma.
-    → Clave primaria (PRIMARY KEY).
+    Clave primaria.
 
     id_producto: producto afectado por la merma.
-    → Clave foránea (FOREIGN KEY) que se relaciona con productos(id_producto).
+    Clave foránea que se relaciona con productos(id_producto).
 
     fecha: fecha en que se registró la merma.
-    → Campo obligatorio.
+    Campo obligatorio.
 
     cantidad: cantidad del producto descartada.
-    → Puede tener decimales.
+    Puede tener decimales.
 
-    motivo: razón de la merma. Ejemplos: "producto vencido", "rotura", "sobrante no reutilizable", etc.
+    motivo: razón de la merma. Ejemplo: "producto vencido", "rotura", "sobrante no reutilizable", etc.
 
 
 
 ### Tabla compras_proveedor
 
-    id_compra: ID único de la compra.
+    id_compra: identificador único de la compra.
 
     id_proveedor: clave foránea del proveedor.
 
@@ -248,11 +243,16 @@ La tabla mermas permite registrar pérdidas de productos por razones como vencim
 
 ### Tabla productos_venta
 
-    id_producto_venta PRIMARY KEY
+    id_producto_venta 
+
     nombre: Nombre del producto que se ofrece al cliente
+
     descripcion	Detalles adicionales 
+
     precio_venta Precio final al cliente
+
     unidad_venta Cómo se vende: "unidad", "porción", "vaso", etc.
+
     activo	BOOLEAN	Indica si está disponible en el menú
 
 
@@ -261,10 +261,10 @@ La tabla mermas permite registrar pérdidas de productos por razones como vencim
 ### Tabla recetas
 
     id_receta: identificador único de la receta.
-    → Clave primaria.
+    Clave primaria.
 
     id_producto_venta: referencia al producto que se elabora con esta receta (ej. milanesa con papas).
-    → Clave foránea a productos_venta(id_producto_venta).
+    Clave foránea a productos_venta(id_producto_venta).
 
     descripcion: texto opcional para describir preparación, pasos, aclaraciones, etc.
 
@@ -273,31 +273,21 @@ La tabla mermas permite registrar pérdidas de productos por razones como vencim
 ### Tabla detalle_receta
 
     id_detalle: identificador único del ingrediente dentro de la receta.
-    → Clave primaria.
+    Clave primaria.
 
     id_receta: identifica a qué receta pertenece ese ingrediente.
-    → Clave foránea a recetas(id_receta).
+    Clave foránea a recetas(id_receta).
 
     id_producto: producto del inventario que se utiliza como ingrediente.
-    → Clave foránea a productos(id_producto).
+    Clave foránea a productos(id_producto).
 
     cantidad: cantidad utilizada para 1 unidad del producto de venta.
 
     unidad_medida: libre, por ejemplo: "g", "ml", "unidad", "cucharada", etc.
 
 
-## Imagenes del proyecto
 
-Vista de.......
-
-![](./tercera_pre_entrega/src/public/img/Captura%20de%20pantalla%202024-07-09%20a%20la(s)%207.27.06 p. m..png)
-
-
-
-
-
-
-## Links a los detalles
+## Índice
 
 [Diagrama Entidad-Relacion ER](./Captura%20de%20pantalla%202025-08-08%20a%20la(s)%2012.40.54.png)
 
