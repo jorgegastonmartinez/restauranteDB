@@ -119,3 +119,6 @@ CREATE TABLE detalle_receta (
     FOREIGN KEY (id_receta) REFERENCES recetas(id_receta),
     FOREIGN KEY (id_producto) REFERENCES productos(id_producto)
 );
+
+ALTER TABLE productos_vendidos
+MODIFY COLUMN cantidad INT NOT NULL;

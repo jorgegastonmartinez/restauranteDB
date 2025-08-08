@@ -72,7 +72,6 @@ El restaurante opera con un modelo mixto de atención en salón y take-away, con
 Este modelo permite centralizar toda la información operativa clave en una única base de datos, lo que optimiza la gestión, reduce errores humanos y proporciona datos analíticos valiosos para la toma de decisiones estratégicas, como planificación de compras, control de costos, productividad del personal y desempeño por turno o producto.
 
 
-
 ## Tablas
 
 ### Tabla empleados
@@ -103,201 +102,235 @@ Almacena los datos del personal del restaurante. Cada empleado tiene asignado un
     clave_acceso: contraseña o clave de acceso del empleado.
     → hasta 20 caracteres, obligatorio.
 
-
 ### Tabla fichajes
 
-    id_fichaje: identificador único del registro de asistencia.
+Registra los horarios de entrada y salida de los empleados. 
 
-    id_empleado: clave foránea que conecta con la tabla Empleados.
+    id_fichaje: identificador único del registro de asistencia.
+    → clave primaria, se autoincrementa.
+
+    id_empleado: dentificador del empleado que hace el fichaje.
+    → clave foránea que conecta con la tabla empleados.
 
     fecha: indica el día del fichaje.
+    → obligatorio.
 
     hora_ingreso: hora exacta en que el empleado fichó.
+    → obligatorio.
 
-    hora_egreso puede quedar NULL si el empleado aún no egresó 
+    hora_egreso: Hora en que el empleado salió ese día.
+    → puede quedar NULL si el empleado aún no registró su salida.
 
 ### Tabla proveedores
 
+Almacena la información de los proveedores que suministran productos o servicios al restaurante.
+
     id_proveedor: identificador único del proveedor.
-    Clave primaria (PRIMARY KEY) de la tabla.
+    → clave primaria, se autoincrementa.
 
-    nombre: nombre del proveedor o empresa proveedora.
-    Campo obligatorio.
+    nombre: nombre del proveedor.
+    → obligatorio, hasta 100 caracteres.
 
-    telefono: número de contacto (opcional).
+    telefono: número de teléfono del proveedor.
+    → opcional, hasta 20 caracteres.
 
-    email: correo electrónico del proveedor (opcional).
+    email: correo electrónico del proveedor.
+    → opcional, hasta 100 caracteres.
 
-
+    categoria: tipo o categoría del proveedor (por ejemplo: alimentos, limpieza, etc.).
+    → opcional, hasta 50 caracteres.
 
 ### Tabla productos
 
+Contiene los productos que utiliza el restaurante vinculados a sus proveedores.
+
     id_producto: identificador único del producto.
-    Clave primaria.
+    → clave primaria, se autoincrementa.
 
-    nombre: nombre del producto o insumo (ej: tomate, pollo, aceite).
-    Campo obligatorio.
+    nombre: nombre del producto.
+    → obligatorio, hasta 100 caracteres.
 
-    unidad_medida: unidad en la que se mide el producto (kg, litros, unidades, etc.).
-    Campo obligatorio para control del inventario.
+    unidad_medida: unidad en la que se mide el producto (ejemplo: kg, litros, unidad).
+    → obligatorio, hasta 20 caracteres.
 
-    id_proveedor: referencia al proveedor que suministra el producto.
-    Clave foránea que enlaza con proveedores(id_proveedor).
-
-
+    id_proveedor: identificador del proveedor que suministra el producto.
+    → clave foránea que conecta con la tabla proveedores, obligatorio.
 
 ### Tabla inventario
 
+Hace un recuento de los productos por mes.
+
     id_inventario: identificador único del registro de inventario.
-    Clave primaria (PRIMARY KEY).
+    → clave primaria, se autoincrementa.
 
-    id_producto: referencia al producto cuyo stock se está registrando.
-    Clave foránea vinculada a productos(id_producto).
+    id_producto: identificador del producto al que corresponde el inventario.
+    → clave foránea que conecta con la tabla productos, obligatorio.
 
-    mes: mes y año del registro en formato AAAA-MM (ejemplo: '2025-08').
-    Campo obligatorio para diferenciar inventarios mensuales.
+    mes: mes y año del registro en formato YYYY-MM.
+    → obligatorio.
 
-    cantidad: cantidad disponible del producto en ese mes.
-    Campo obligatorio, puede tener decimales para mayor precisión.
+    cantidad: cantidad del producto en ese mes.
+    → obligatorio, con hasta 10 dígitos y 2 decimales.
 
-    Restricción única: combinación de id_producto y mes para evitar duplicados en el mismo período.
-
+    Restricción única en la combinación (id_producto, mes):
+    → garantiza que no haya registros duplicados para el mismo producto en un mismo mes.
 
 ### Tabla ventas
 
+Registra las ventas realizadas en distintos turnos del día.
+
     id_venta: identificador único de la venta.
-    Clave primaria.
+    → clave primaria, se autoincrementa.
 
     fecha: fecha en que se realizó la venta.
-    Campo obligatorio.
+    → obligatorio.
 
-    turno: turno de la venta, con los valores permitidos: desayuno, almuerzo o merienda.
-    Campo obligatorio.
+    turno: turno del día en que se efectuó la venta.
+    → obligatorio, valores posibles: 'desayuno', 'almuerzo', 'merienda'.
 
-    total: monto total de la venta en moneda local.
-    Campo obligatorio.
-
-
+    total: monto total de la venta.
+    → obligatorio, con hasta 10 dígitos y 2 decimales.
 
 ### Tabla productos_vendidos
 
-    id_producto_vendido: identificador único del ítem vendido.
-    Clave primaria.
+Registra los productos vendidos en cada venta, detallando cantidades y precios.
 
-    id_venta: referencia a la venta asociada.
-    Clave foránea que se relaciona con ventas(id_venta).
+    id_producto_vendido: identificador único del registro de producto vendido.
+    → clave primaria, se autoincrementa.
 
-    id_producto: producto que fue vendido.
-    Clave foránea que se relaciona con productos(id_producto).
+    id_venta: identificador de la venta a la que pertenece este producto vendido.
+    → clave foránea que conecta con la tabla ventas, obligatorio.
 
-    cantidad: cantidad de unidades vendidas del producto.
-    Campo obligatorio.
+    id_producto: identificador del producto vendido.
+    → clave foránea que conecta con la tabla productos, obligatorio.
 
-    precio_unitario: precio unitario del producto al momento de la venta.
-    Campo obligatorio. Esto te permite mantener un historial de precios aunque el valor cambie en el futuro.
+    cantidad: cantidad del producto vendido en esa venta.
+    → tipo entero y obligatorio.
 
-
+    precio_unitario: precio por unidad del producto en esa venta.
+    → obligatorio, con hasta 10 dígitos y 2 decimales.
 
 ### Tabla mermas
-La tabla mermas permite registrar pérdidas de productos por razones como vencimiento, mala manipulación, rotura, etc. Esto es clave para llevar un buen control del inventario.
 
-    id_merma: identificador único de la merma.
-    Clave primaria.
+Registra las pérdidas o desperdicios de productos en la empresa.
 
-    id_producto: producto afectado por la merma.
-    Clave foránea que se relaciona con productos(id_producto).
+    id_merma: identificador único del registro de merma.
+    → clave primaria, se autoincrementa.
 
-    fecha: fecha en que se registró la merma.
-    Campo obligatorio.
+    id_producto: identificador del producto que sufrió la merma.
+    → clave foránea que conecta con la tabla productos, obligatorio.
 
-    cantidad: cantidad del producto descartada.
-    Puede tener decimales.
+    fecha: fecha en que ocurrió la merma.
+    → obligatorio.
 
-    motivo: razón de la merma. Ejemplo: "producto vencido", "rotura", "sobrante no reutilizable", etc.
+    cantidad: cantidad del producto que se perdió o desperdició.
+    → obligatorio, con hasta 10 dígitos y 2 decimales.
 
-
+    motivo: razón o descripción breve del por qué se produjo la merma.
+    → opcional, hasta 100 caracteres.
 
 ### Tabla compras_proveedor
 
+Registra las compras realizadas a los proveedores.
+
     id_compra: identificador único de la compra.
+    → clave primaria, se autoincrementa.
 
-    id_proveedor: clave foránea del proveedor.
+    id_proveedor: identificador del proveedor al que se le realizó la compra.
+    → clave foránea que conecta con la tabla proveedores, obligatorio.
 
-    nro_factura: número o código de la factura.
+    nro_factura: número o código de la factura de la compra.
+    → obligatorio, hasta 50 caracteres.
 
-    fecha: fecha de emisión de la factura.
+    fecha: fecha en que se realizó la compra.
+    → obligatorio.
 
-    importe_total: suma total de la factura.
+    importe_total: monto total de la compra.
+    → obligatorio, con hasta 10 dígitos y 2 decimales.
 
-    metodo_pago: puede ser "efectivo", "transferencia", "tarjeta", etc. (opcional).
-
-
+    metodo_pago: forma o método de pago utilizado (ejemplo: efectivo, tarjeta).
+    → opcional, hasta 50 caracteres.
 
 ### Tabla detalle_compras_proveedor
 
-    id_detalle: identificador del ítem.
+Registra el detalle de los productos comprados en cada compra realizada a proveedores.
 
-    id_compra: clave foránea que se relaciona con compras.
+    id_detalle: identificador único del detalle de compra.
+    → clave primaria, se autoincrementa.
 
-    id_producto: producto comprado.
+    id_compra: identificador de la compra a la que pertenece este detalle.
+    → clave foránea que conecta con la tabla compras_proveedor, obligatorio.
 
-    cantidad: cantidad adquirida.
+    id_producto: identificador del producto comprado.
+    → clave foránea que conecta con la tabla productos, obligatorio.
 
-    precio_unitario: precio por unidad de ese producto.
+    cantidad: cantidad del producto comprado en esta compra.
+    → obligatorio, con hasta 10 dígitos y 2 decimales.
 
+    unidad_medida: unidad en la que se mide la cantidad (ejemplo: kg, litros, unidad).
+    → obligatorio, hasta 20 caracteres.
 
-
+    precio_unitario: precio por unidad del producto en esta compra.
+    → obligatorio, con hasta 10 dígitos y 2 decimales.
 
 ### Tabla productos_venta
 
-    id_producto_venta 
+Contiene los productos que se ofrecen para la venta en el restaurante.
 
-    nombre: Nombre del producto que se ofrece al cliente
+    id_producto_venta: identificador único del producto para la venta.
+    → clave primaria, se autoincrementa.
 
-    descripcion	Detalles adicionales 
+    nombre: nombre del producto vendido.
+    → obligatorio, hasta 100 caracteres.
 
-    precio_venta Precio final al cliente
+    descripcion: descripción detallada del producto.
+    → opcional, tipo texto.
 
-    unidad_venta Cómo se vende: "unidad", "porción", "vaso", etc.
+    precio_venta: precio al que se vende el producto.
+    → obligatorio, con hasta 10 dígitos y 2 decimales.
 
-    activo	BOOLEAN	Indica si está disponible en el menú
+    unidad_venta: unidad en la que se vende el producto (ejemplo: unidad, plato, porción).
+    → opcional, hasta 20 caracteres, por defecto 'unidad'.
 
-
-
+    activo: indica si el producto está activo para la venta.
+    → opcional, valor booleano, por defecto TRUE.
 
 ### Tabla recetas
 
+Almacena las recetas asociadas a los productos que se venden en el restaurante.
+
     id_receta: identificador único de la receta.
-    Clave primaria.
+    → clave primaria, se autoincrementa.
 
-    id_producto_venta: referencia al producto que se elabora con esta receta (ej. milanesa con papas).
-    Clave foránea a productos_venta(id_producto_venta).
+    id_producto_venta: identificador del producto de venta al que pertenece la receta.
+    → clave foránea que conecta con la tabla productos_venta, obligatorio.
 
-    descripcion: texto opcional para describir preparación, pasos, aclaraciones, etc.
-
-
+    descripcion: detalle o explicación de la receta.
+    → opcional, tipo texto.
 
 ### Tabla detalle_receta
 
-    id_detalle: identificador único del ingrediente dentro de la receta.
-    Clave primaria.
+Define los ingredientes y cantidades que componen cada receta asociada a un producto de venta.
 
-    id_receta: identifica a qué receta pertenece ese ingrediente.
-    Clave foránea a recetas(id_receta).
+    id_detalle: identificador único del detalle de la receta.
+    → clave primaria, se autoincrementa.
 
-    id_producto: producto del inventario que se utiliza como ingrediente.
-    Clave foránea a productos(id_producto).
+    id_receta: identificador de la receta a la que pertenece este ingrediente.
+    → clave foránea que conecta con la tabla recetas, obligatorio.
 
-    cantidad: cantidad utilizada para 1 unidad del producto de venta.
+    id_producto: identificador del producto (ingrediente) usado en la receta.
+    → clave foránea que conecta con la tabla productos, obligatorio.
 
-    unidad_medida: libre, por ejemplo: "g", "ml", "unidad", "cucharada", etc.
+    cantidad: cantidad del ingrediente necesaria para la receta.
+    → obligatorio, con hasta 10 dígitos y 2 decimales.
 
+    unidad_medida: unidad en la que se mide la cantidad (ejemplo: kg, litros, unidad).
+    → opcional, hasta 20 caracteres.
 
 
 ## Índice
 
 [Diagrama Entidad-Relacion ER](./Captura%20de%20pantalla%202025-08-08%20a%20la(s)%2012.40.54.png)
-[Inserción de datos](./insert_data.sql)
 
 [Inserción de datos](./insert_data.sql)
 
