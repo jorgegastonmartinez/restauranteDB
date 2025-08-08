@@ -16,12 +16,12 @@ Backend
 81830
 
 
-# Sobre mi proyecto
+## Sobre mi proyecto
 
 Este proyecto tiene como finalidad el diseño y desarrollo de una base de datos relacional orientada a la gestión operativa de un restaurante. Se enfoca en organizar y centralizar información clave vinculada al personal, control de inventario, proveedores y registro de asistencia, permitiendo así una administración más eficiente de los recursos internos del establecimiento. A través de un modelo estructurado, se busca reflejar los procesos reales que se dan en la operación diaria del restaurante.
 
 
-# Objetivo
+## Objetivo
 
 El objetivo del proyecto es construir una base de datos relacional que centralice y gestione la información esencial del funcionamiento diario del restaurante, abarcando múltiples áreas funcionales:
 
@@ -38,7 +38,7 @@ El objetivo del proyecto es construir una base de datos relacional que centralic
 El sistema está diseñado para ofrecer una visión integrada de la operación, permitiendo mejorar la eficiencia interna, reducir pérdidas, y generar información útil para áreas contables, logísticas y analíticas.
 
 
-# Situación Problemática
+## Situación Problemática
 
 En la operación diaria de un restaurante, se manejan grandes volúmenes de información relacionados con la asistencia del personal, control de inventario, compras a proveedores, ventas, y pérdidas por mermas. Cuando esta información no está organizada de forma estructurada o depende de registros manuales (papel, planillas de cálculo, mensajes), se generan múltiples problemas operativos y administrativos:
 
@@ -57,7 +57,7 @@ La ausencia de una base de datos relacional impide que estas áreas estén conec
 La implementación de una base de datos relacional busca resolver estas problemáticas mediante la centralización, organización y vinculación de la información clave, ofreciendo una herramienta integral que permite mejorar el control de insumos, optimizar recursos humanos, analizar resultados de ventas y reducir pérdidas por mala gestión de stock o producción.
 
 
-# Modelo de Negocio 
+## Modelo de Negocio 
 
 La organización que utiliza esta solución es un restaurante urbano ubicado en una zona comercial de oficinas, cuya propuesta gastronómica abarca desayuno, almuerzo y merienda, siendo el almuerzo el punto más fuerte de ventas por el flujo de clientes en horarios laborales.
 
@@ -70,13 +70,6 @@ El restaurante opera con un modelo mixto de atención en salón y take-away, con
 - Administración: encargados de coordinar compras, stock, proveedores, personal y supervisión general de las operaciones.
 
 Este modelo permite centralizar toda la información operativa clave en una única base de datos, lo que optimiza la gestión, reduce errores humanos y proporciona datos analíticos valiosos para la toma de decisiones estratégicas, como planificación de compras, control de costos, productividad del personal y desempeño por turno o producto.
-
-
-
-## Funcionalidades
-
-Se utilizarán claves primarias, foráneas y relaciones entre tablas para asegurar la integridad de los datos.
-
 
 
 
