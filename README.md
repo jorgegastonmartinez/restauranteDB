@@ -18,7 +18,7 @@ Backend
 
 ## Sobre mi proyecto
 
-Este proyecto tiene como finalidad el diseño y desarrollo de una base de datos relacional orientada a la gestión operativa de un restaurante. Se enfoca en organizar y centralizar información clave vinculada al personal, control de inventario, proveedores y registro de asistencia, permitiendo así una administración más eficiente de los recursos internos del establecimiento. A través de un modelo estructurado, se busca reflejar los procesos reales que se dan en la operación diaria del restaurante.
+Este proyecto tiene como finalidad el diseño y desarrollo de una base de datos relacional orientada a la gestión operativa de un restaurante. Se enfoca en organizar y centralizar información clave vinculada al personal, control de inventario, proveedores y registro de asistencia, permitiendo así una administración más eficiente. A través de un modelo estructurado, se busca reflejar los procesos reales que se dan en la operación diaria del restaurante.
 
 
 ## Objetivo
@@ -35,7 +35,7 @@ El objetivo del proyecto es construir una base de datos relacional que centralic
 
 * Mermas: cargar los desperdicios o pérdidas de productos, insumos o preparaciones, con el fin de identificar puntos críticos y optimizar costos operativos.
 
-El sistema está diseñado para ofrecer una visión integrada de la operación, permitiendo mejorar la eficiencia interna, reducir pérdidas, y generar información útil para áreas contables, logísticas y analíticas.
+El sistema está diseñado para ofrecer una visión integrada de la operación, permitiendo mejorar, reducir pérdidas, y generar información útil para áreas contables, logísticas y analíticas.
 
 
 ## Situación Problemática
@@ -54,7 +54,7 @@ En la operación diaria de un restaurante, se manejan grandes volúmenes de info
 
 La ausencia de una base de datos relacional impide que estas áreas estén conectadas entre sí, generando ineficiencias, pérdida de tiempo y mayor margen de error humano.
 
-La implementación de una base de datos relacional busca resolver estas problemáticas mediante la centralización, organización y vinculación de la información clave, ofreciendo una herramienta integral que permite mejorar el control de insumos, optimizar recursos humanos, analizar resultados de ventas y reducir pérdidas por mala gestión de stock o producción.
+La implementación de una base de datos relacional busca resolver estas problemáticas mediante la centralización, organización y vinculación de la información, ofreciendo una herramienta integral que permite mejorar el control de insumos, optimizar recursos humanos, analizar resultados de ventas y reducir pérdidas por mala gestión de stock o producción.
 
 
 ## Modelo de Negocio 
@@ -79,15 +79,29 @@ Este modelo permite centralizar toda la información operativa clave en una úni
 
 Almacena los datos del personal del restaurante. Cada empleado tiene asignado un rol operativo (salón, cocina o administración), además de un número de documento único y una fecha de ingreso al establecimiento. También se controla si el empleado está activo o no.
 
-    id_empleado: clave primaria, se autoincrementa
+    id_empleado: identificador único del empleado.
+    → clave primaria, se autoincrementa.
 
-    dni: tiene restricción UNIQUE para evitar duplicados
+    nombre: nombre del empleado.
+    → hasta 50 caracteres, obligatorio.
 
-    rol: restringido a los tres tipos definidos
+    apellido: apellido del empleado. 
+    → Hasta 50 caracteres, obligatorio.
 
-    activo: por defecto es TRUE
+    dni: documento de identidad del empleado.
+    → hasta 15 caracteres, obligatorio. Tiene restricción UNIQUE para evitar duplicados.
 
-    clave_acceso: NOT NULL
+    rol: El puesto o función del empleado.
+    → restringido a los tres tipos definidos.
+
+    fecha_ingreso: Fecha en que el empleado ingresó a la empresa.
+    → obligatorio.
+
+    activo: Indica si el empleado está trabajando en la empresa. 
+    → por defecto es TRUE.
+
+    clave_acceso: contraseña o clave de acceso del empleado.
+    → hasta 20 caracteres, obligatorio.
 
 
 ### Tabla fichajes
