@@ -5,11 +5,11 @@ RestauranteDB
 
 # Autor
 
-Jorge Martinez.
+Jorge Martinez
 
 
 # Curso
-Backend 
+SQL
 
 
 # Comisión
@@ -74,7 +74,7 @@ Este modelo permite centralizar toda la información operativa clave en una úni
 
 ## Tablas
 
-### Tabla empleados
+### Tabla 'empleados'
 
 Almacena los datos del personal del restaurante. Cada empleado tiene asignado un rol operativo (salón, cocina o administración), además de un número de documento único y una fecha de ingreso al establecimiento. También se controla si el empleado está activo o no.
 
@@ -102,7 +102,7 @@ Almacena los datos del personal del restaurante. Cada empleado tiene asignado un
     clave_acceso: contraseña o clave de acceso del empleado.
     → hasta 20 caracteres, obligatorio.
 
-### Tabla fichajes
+### Tabla 'fichajes'
 
 Registra los horarios de entrada y salida de los empleados. 
 
@@ -121,7 +121,7 @@ Registra los horarios de entrada y salida de los empleados.
     hora_egreso: Hora en que el empleado salió ese día.
     → puede quedar NULL si el empleado aún no registró su salida.
 
-### Tabla proveedores
+### Tabla 'proveedores'
 
 Almacena la información de los proveedores que suministran productos o servicios al restaurante.
 
@@ -140,7 +140,7 @@ Almacena la información de los proveedores que suministran productos o servicio
     categoria: tipo o categoría del proveedor (por ejemplo: alimentos, limpieza, etc.).
     → opcional, hasta 50 caracteres.
 
-### Tabla productos
+### Tabla 'productos'
 
 Contiene los productos que utiliza el restaurante vinculados a sus proveedores.
 
@@ -156,7 +156,7 @@ Contiene los productos que utiliza el restaurante vinculados a sus proveedores.
     id_proveedor: identificador del proveedor que suministra el producto.
     → clave foránea que conecta con la tabla proveedores, obligatorio.
 
-### Tabla inventario
+### Tabla 'inventario'
 
 Hace un recuento de los productos por mes.
 
@@ -175,7 +175,7 @@ Hace un recuento de los productos por mes.
     Restricción única en la combinación (id_producto, mes):
     → garantiza que no haya registros duplicados para el mismo producto en un mismo mes.
 
-### Tabla ventas
+### Tabla 'ventas'
 
 Registra las ventas realizadas en distintos turnos del día.
 
@@ -191,7 +191,7 @@ Registra las ventas realizadas en distintos turnos del día.
     total: monto total de la venta.
     → obligatorio, con hasta 10 dígitos y 2 decimales.
 
-### Tabla productos_vendidos
+### Tabla 'productos_vendidos'
 
 Registra los productos vendidos en cada venta, detallando cantidades y precios.
 
@@ -210,7 +210,7 @@ Registra los productos vendidos en cada venta, detallando cantidades y precios.
     precio_unitario: precio por unidad del producto en esa venta.
     → obligatorio, con hasta 10 dígitos y 2 decimales.
 
-### Tabla mermas
+### Tabla 'mermas'
 
 Registra las pérdidas o desperdicios de productos en la empresa.
 
@@ -229,7 +229,7 @@ Registra las pérdidas o desperdicios de productos en la empresa.
     motivo: razón o descripción breve del por qué se produjo la merma.
     → opcional, hasta 100 caracteres.
 
-### Tabla compras_proveedor
+### Tabla 'compras_proveedor'
 
 Registra las compras realizadas a los proveedores.
 
@@ -251,7 +251,7 @@ Registra las compras realizadas a los proveedores.
     metodo_pago: forma o método de pago utilizado (ejemplo: efectivo, tarjeta).
     → opcional, hasta 50 caracteres.
 
-### Tabla detalle_compras_proveedor
+### Tabla 'detalle_compras_proveedor'
 
 Registra el detalle de los productos comprados en cada compra realizada a proveedores.
 
@@ -273,7 +273,7 @@ Registra el detalle de los productos comprados en cada compra realizada a provee
     precio_unitario: precio por unidad del producto en esta compra.
     → obligatorio, con hasta 10 dígitos y 2 decimales.
 
-### Tabla productos_venta
+### Tabla 'productos_venta'
 
 Contiene los productos que se ofrecen para la venta en el restaurante.
 
@@ -295,7 +295,7 @@ Contiene los productos que se ofrecen para la venta en el restaurante.
     activo: indica si el producto está activo para la venta.
     → opcional, valor booleano, por defecto TRUE.
 
-### Tabla recetas
+### Tabla 'recetas'
 
 Almacena las recetas asociadas a los productos que se venden en el restaurante.
 
@@ -308,7 +308,7 @@ Almacena las recetas asociadas a los productos que se venden en el restaurante.
     descripcion: detalle o explicación de la receta.
     → opcional, tipo texto.
 
-### Tabla detalle_receta
+### Tabla 'detalle_receta'
 
 Define los ingredientes y cantidades que componen cada receta asociada a un producto de venta.
 
