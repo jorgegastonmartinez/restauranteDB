@@ -330,6 +330,8 @@ Define los ingredientes y cantidades que componen cada receta asociada a un prod
 
 ## Índice
 
+[Creación de tablas](./create_table.sql)
+
 [Diagrama Entidad-Relacion ER](./Captura%20de%20pantalla%202025-08-08%20a%20la(s)%2012.40.54.png)
 
 [Inserción de datos](./insert_data.sql)
