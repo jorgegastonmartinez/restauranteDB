@@ -188,7 +188,7 @@ precio_unitario: precio unitario del producto al momento de la venta.
 
 
 
-Tabla mermas
+### Tabla mermas
 La tabla mermas te va a permitir registrar pérdidas de productos por razones como vencimiento, mala manipulación, rotura, etc. Esto es clave para llevar un buen control del inventario.
 
     id_merma: identificador único de la merma.
@@ -203,7 +203,7 @@ La tabla mermas te va a permitir registrar pérdidas de productos por razones co
     cantidad: cantidad del producto descartada.
     → Puede tener decimales.
 
-    motivo: razón de la merma (opcional pero recomendable). Ejemplos: "producto vencido", "rotura", "sobrante no reutilizable", etc.
+    motivo: razón de la merma. Ejemplos: "producto vencido", "rotura", "sobrante no reutilizable", etc.
 
 
 
