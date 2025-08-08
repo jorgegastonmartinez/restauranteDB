@@ -1,0 +1,358 @@
+USE restauranteDB;
+
+INSERT INTO empleados (nombre, apellido, dni, rol, fecha_ingreso, activo, clave_acceso)
+VALUES
+('Juan', 'Pérez', '30123456', 'salon', '2021-03-15', TRUE, 'jperez123'),
+('María', 'Gómez', '28987654', 'cocina', '2020-07-10', TRUE, 'mgomez2020'),
+('Luis', 'Martínez', '31567890', 'admin', '2019-01-25', TRUE, 'lmartinez'),
+('Ana', 'Fernández', '32456789', 'salon', '2022-05-12', TRUE, 'afernandez'),
+('Carlos', 'Rodríguez', '29543210', 'cocina', '2018-09-01', TRUE, 'crodriguez'),
+('Lucía', 'Díaz', '33456781', 'salon', '2023-02-20', TRUE, 'ldiaz23'),
+('Pedro', 'Sánchez', '28456732', 'cocina', '2021-11-08', TRUE, 'psanchez21'),
+('Sofía', 'Romero', '30456123', 'salon', '2020-04-30', TRUE, 'sromero20'),
+('Miguel', 'Torres', '32567845', 'admin', '2017-06-18', FALSE, 'mtorres17'),
+('Valeria', 'Molina', '31456723', 'cocina', '2023-01-05', TRUE, 'vmolina23'),
+('Javier', 'Suárez', '27456123', 'salon', '2019-08-25', TRUE, 'jsuarez19'),
+('Camila', 'Herrera', '34561234', 'cocina', '2022-09-14', TRUE, 'cherrera22'),
+('Andrés', 'Morales', '28567412', 'salon', '2021-06-03', TRUE, 'amorales21'),
+('Paula', 'Navarro', '33678123', 'cocina', '2020-12-19', FALSE, 'pnavarro20'),
+('Gustavo', 'Castro', '31876543', 'salon', '2018-02-27', TRUE, 'gcastro18'),
+('Carolina', 'Ríos', '30561234', 'admin', '2023-07-21', TRUE, 'crios23'),
+('Tomás', 'López', '29456781', 'cocina', '2019-05-15', TRUE, 'tlopez19'),
+('Natalia', 'Vega', '31543210', 'salon', '2022-11-11', TRUE, 'nvega22'),
+('Federico', 'Silva', '30456782', 'cocina', '2021-01-09', TRUE, 'fsilva21'),
+('Elena', 'Aguilar', '27561234', 'salon', '2020-08-02', TRUE, 'eaguilar20');
+
+SELECT * FROM empleados;
+
+INSERT INTO fichajes (id_empleado, fecha, hora_ingreso, hora_egreso)
+VALUES
+(1, '2025-08-01', '08:55:00', '17:05:00'),
+(1, '2025-08-02', '09:02:00', '17:10:00'),
+(2, '2025-08-01', '07:50:00', '16:00:00'),
+(2, '2025-08-03', '07:55:00', '16:05:00'),
+(3, '2025-08-01', '09:15:00', '18:05:00'),
+(3, '2025-08-02', '09:05:00', '18:00:00'),
+(4, '2025-08-01', '08:45:00', '17:00:00'),
+(5, '2025-08-01', '07:58:00', '16:03:00'),
+(5, '2025-08-02', '08:00:00', '16:05:00'),
+(6, '2025-08-01', '09:10:00', '17:20:00'),
+(7, '2025-08-01', '07:45:00', '15:55:00'),
+(8, '2025-08-02', '08:50:00', '17:02:00'),
+(9, '2025-08-01', '09:20:00', '18:15:00'),
+(10, '2025-08-01', '07:40:00', '15:50:00'),
+(10, '2025-08-03', '07:42:00', '15:55:00'),
+(11, '2025-08-01', '08:55:00', '17:10:00'),
+(12, '2025-08-02', '07:55:00', '16:02:00'),
+(13, '2025-08-01', '09:05:00', '17:05:00'),
+(14, '2025-08-01', '07:48:00', '15:58:00'),
+(14, '2025-08-02', '07:52:00', '16:00:00'),
+(15, '2025-08-01', '08:40:00', '16:50:00'),
+(16, '2025-08-03', '09:25:00', '18:20:00'),
+(17, '2025-08-01', '07:50:00', '16:00:00'),
+(18, '2025-08-02', '08:58:00', '17:05:00'),
+(19, '2025-08-01', '07:55:00', '15:55:00'),
+(20, '2025-08-01', '08:45:00', '17:00:00');
+
+SELECT * FROM fichajes;
+
+INSERT INTO proveedores (nombre, telefono, email, categoria)
+VALUES
+('Verduras Frescas SRL', '1123456789', 'contacto@verdurasfrescas.com', 'verduleria'),
+('Frutas del Sol', '1134567890', 'ventas@frutasdelsol.com', 'verduleria'),
+('Carnes Premium SA', '1145678901', 'info@carnespremium.com', 'carnes'),
+('Frigorífico La Pampa', '1156789012', 'pedidos@lapampa.com', 'carnes'),
+('Panadería El Trigal', '1167890123', 'contacto@eltrigal.com', 'panaderia'),
+('Panificados La Miga', '1178901234', 'ventas@lamiga.com', 'panaderia'),
+('Pack Solutions SRL', '1189012345', 'info@packsolutions.com', 'packaging'),
+('Envases del Sur', '1190123456', 'ventas@envasesdelsur.com', 'packaging'),
+('Limpieza Total', '1101234567', 'contacto@limpiezatotal.com', 'limpieza'),
+('Productos Higiénicos SA', '1112345678', 'ventas@higienicos.com', 'limpieza'),
+('Lácteos del Campo', '1123456790', 'info@lacteosdelcampo.com', 'lacteos'),
+('Quesos y Más', '1134567801', 'ventas@quesosymas.com', 'lacteos');
+
+SELECT * 
+FROM proveedores
+ORDER BY categoria;
+
+INSERT INTO productos (nombre, unidad_medida, id_proveedor)
+VALUES
+('Tomate redondo', 'kg', 1),
+('Lechuga criolla', 'unidad', 1),
+('Banana', 'kg', 2),
+('Manzana roja', 'kg', 2),
+('Cebolla', 'kg', 1),
+('Zanahoria', 'kg', 1),
+('Perejil', 'manojo', 1),
+('Apio', 'manojo', 1),
+('Espinaca', 'manojo', 1),
+('Pimiento rojo', 'kg', 2),
+('Acelga', 'manojo', 2),
+('Naranja', 'kg', 2),
+('Limón', 'kg', 2),
+('Cilantro', 'manojo', 2),
+('Bife de chorizo', 'kg', 3),
+('Pechuga de pollo', 'kg', 3),
+('Carne molida', 'kg', 4),
+('Costillas de cerdo', 'kg', 4),
+('Pan francés', 'unidad', 5),
+('Medialunas', 'docena', 5),
+('Pan integral', 'unidad', 6),
+('Facturas surtidas', 'docena', 6),
+('Caja de cartón mediana', 'unidad', 7),
+('Bolsa plástica 30x40', 'paquete', 7),
+('Vaso descartable 200ml', 'paquete', 8),
+('Tapa plástica para vaso', 'paquete', 8),
+('Lavandina', 'litro', 9),
+('Detergente', 'litro', 9),
+('Jabón en polvo', 'kg', 10),
+('Desinfectante multiuso', 'litro', 10),
+('Esponja para platos', 'unidad', 9),
+('Guantes de goma', 'par', 9),
+('Trapo de piso', 'unidad', 9),
+('Desengrasante', 'litro', 10),
+('Limpiador de vidrios', 'litro', 10),
+('Ambientador spray', 'unidad', 9),
+('Leche entera', 'litro', 11),
+('Queso cremoso', 'kg', 11),
+('Yogur bebible', 'litro', 12),
+('Queso rallado', 'paquete', 12);
+
+
+INSERT INTO inventario (id_producto, mes, cantidad)
+VALUES
+(1, '2025-06', 22340.10),
+(2, '2025-06', 17455.75),
+(3, '2025-06', 30250.25),
+(4, '2025-06', 27500.80),
+(5, '2025-06', 15320.45),
+(6, '2025-06', 14300.60),
+(7, '2025-06', 10250.35),
+(8, '2025-06', 8600.90),
+(9, '2025-06', 7300.55),
+(10, '2025-06', 12450.20),
+(11, '2025-06', 8600.15),
+(12, '2025-06', 28000.40),
+(13, '2025-06', 25000.90),
+(14, '2025-06', 7200.75),
+(15, '2025-06', 12800.30),
+(16, '2025-06', 11800.45),
+(17, '2025-06', 17500.60),
+(18, '2025-06', 15500.80),
+(19, '2025-06', 31000.10),
+(20, '2025-06', 10500.50),
+(1, '2025-07', 21500.55),
+(2, '2025-07', 16500.25),
+(3, '2025-07', 31000.75),
+(4, '2025-07', 27000.80),
+(5, '2025-07', 14500.90),
+(6, '2025-07', 13500.30),
+(7, '2025-07', 9800.10),
+(8, '2025-07', 8200.45),
+(9, '2025-07', 7000.25),
+(10, '2025-07', 12000.60),
+(11, '2025-07', 8500.70),
+(12, '2025-07', 28500.55),
+(13, '2025-07', 24500.40),
+(14, '2025-07', 7100.15),
+(15, '2025-07', 12300.80),
+(16, '2025-07', 11300.65),
+(17, '2025-07', 17000.35),
+(18, '2025-07', 15000.90),
+(19, '2025-07', 30500.10),
+(20, '2025-07', 10000.80),
+(1, '2025-08', 22000.40),
+(2, '2025-08', 17000.90),
+(3, '2025-08', 30000.30),
+(4, '2025-08', 28000.25),
+(5, '2025-08', 15000.50),
+(6, '2025-08', 14000.75),
+(7, '2025-08', 10000.20),
+(8, '2025-08', 8400.35),
+(9, '2025-08', 7200.15),
+(10, '2025-08', 12500.55),
+(11, '2025-08', 8700.60),
+(12, '2025-08', 29000.90),
+(13, '2025-08', 25500.40),
+(14, '2025-08', 7300.75),
+(15, '2025-08', 13000.25),
+(16, '2025-08', 12000.55),
+(17, '2025-08', 18000.80),
+(18, '2025-08', 16000.65),
+(19, '2025-08', 31500.10),
+(20, '2025-08', 11000.45);
+
+INSERT INTO ventas (fecha, turno, total)
+VALUES
+('2025-08-01', 'desayuno', 54320.75),
+('2025-08-01', 'almuerzo', 120450.40),
+('2025-08-01', 'merienda', 32000.15),
+('2025-08-02', 'desayuno', 51200.30),
+('2025-08-02', 'almuerzo', 115000.00),
+('2025-08-02', 'merienda', 28000.50),
+('2025-08-03', 'desayuno', 49000.85),
+('2025-08-03', 'almuerzo', 118500.25),
+('2025-08-03', 'merienda', 31000.10);
+
+INSERT INTO productos_vendidos (id_venta, id_producto, cantidad, precio_unitario)
+VALUES
+(1, 19, 10, 450.00),
+(1, 20, 5, 1200.00),
+(1, 1, 15, 100.50),
+(2, 15, 8, 950.00),
+(2, 16, 12, 780.00),
+(2, 3, 20, 150.75),
+(3, 5, 10, 90.00),
+(3, 6, 8, 85.00),
+(3, 2, 12, 70.50),
+(4, 19, 9, 460.00),
+(4, 4, 18, 160.00),
+(5, 1, 14, 105.00),
+(5, 7, 5, 200.00),
+(6, 15, 7, 960.00),
+(6, 20, 4, 1180.00),
+(7, 3, 22, 155.00),
+(7, 8, 10, 60.00),
+(8, 16, 10, 800.00),
+(8, 2, 15, 75.00),
+(9, 1, 20, 110.00);
+
+INSERT INTO mermas (id_producto, fecha, cantidad, motivo)
+VALUES
+(1, '2025-06-05', 1.50, 'Daño por transporte'),
+(3, '2025-06-10', 0.80, 'Caducidad próxima'),
+(5, '2025-06-15', 1.20, 'Mal almacenamiento'),
+(7, '2025-06-20', 0.50, 'Enmohecimiento'),
+(9, '2025-06-25', 0.30, 'Producto dañado'),
+(11, '2025-07-02', 2.00, 'Contaminación cruzada'),
+(13, '2025-07-05', 1.00, 'Exceso en preparación'),
+(15, '2025-07-08', 3.00, 'Corte incorrecto'),
+(17, '2025-07-12', 0.90, 'Desperdicio en cocina'),
+(19, '2025-07-15', 4.00, 'Pan quemado'),
+(2, '2025-07-18', 1.10, 'Fruta pasada'),
+(4, '2025-07-20', 0.70, 'Daño por manipulación'),
+(6, '2025-08-01', 1.50, 'Mal almacenamiento'),
+(8, '2025-08-03', 0.60, 'Producto dañado'),
+(10, '2025-08-05', 2.50, 'Pérdida durante transporte'),
+(12, '2025-08-10', 1.20, 'Fruta pasada'),
+(14, '2025-08-12', 0.80, 'Caducidad próxima'),
+(16, '2025-08-15', 1.00, 'Desperdicio en cocina'),
+(18, '2025-08-18', 0.90, 'Exceso en preparación'),
+(20, '2025-08-20', 2.00, 'Facturas dañadas');
+
+
+INSERT INTO compras_proveedor (id_proveedor, nro_factura, fecha, importe_total, metodo_pago)
+VALUES
+(1, 'F0001', '2025-06-01', 45000.50, 'Efectivo'),
+(2, 'F0002', '2025-06-03', 38000.75, 'Tarjeta de crédito'),
+(3, 'F0003', '2025-06-05', 72000.00, 'Transferencia'),
+(4, 'F0004', '2025-06-07', 56000.30, 'Efectivo'),
+(5, 'F0005', '2025-06-09', 25000.40, 'Tarjeta de débito'),
+(6, 'F0006', '2025-06-11', 27000.20, 'Efectivo'),
+(7, 'F0007', '2025-07-01', 18000.90, 'Transferencia'),
+(8, 'F0008', '2025-07-03', 22000.75, 'Tarjeta de crédito'),
+(9, 'F0009', '2025-07-05', 15000.10, 'Efectivo'),
+(10, 'F0010', '2025-07-07', 17000.50, 'Tarjeta de débito'),
+(11, 'F0011', '2025-07-09', 30000.00, 'Transferencia'),
+(12, 'F0012', '2025-07-11', 28000.45, 'Efectivo'),
+(1, 'F0013', '2025-08-01', 46000.60, 'Tarjeta de crédito'),
+(3, 'F0014', '2025-08-03', 74000.80, 'Efectivo'),
+(5, 'F0015', '2025-08-05', 26000.25, 'Transferencia'),
+(7, 'F0016', '2025-08-07', 19000.35, 'Tarjeta de débito'),
+(9, 'F0017', '2025-08-09', 16000.75, 'Efectivo'),
+(11, 'F0018', '2025-08-11', 31000.90, 'Tarjeta de crédito');
+
+
+INSERT INTO detalle_compras_proveedor (id_compra, id_producto, cantidad, unidad_medida, precio_unitario)
+VALUES
+(1, 1, 100.50, 'kg', 223.40),
+(1, 2, 50.00, 'unidad', 174.55),
+(2, 3, 150.00, 'kg', 302.50),
+(2, 4, 120.00, 'kg', 275.00),
+(3, 15, 40.00, 'kg', 128.00),
+(3, 16, 35.00, 'kg', 118.00),
+(4, 19, 100.00, 'unidad', 310.00),
+(4, 20, 30.00, 'docena', 1050.00),
+(5, 5, 70.00, 'kg', 153.20),
+(5, 6, 65.00, 'kg', 143.00),
+(6, 7, 40.00, 'unidad', 102.50),
+(6, 8, 35.00, 'unidad', 86.00),
+(7, 9, 25.00, 'unidad', 73.00),
+(7, 10, 50.00, 'kg', 124.50),
+(8, 11, 30.00, 'unidad', 86.00),
+(8, 12, 120.00, 'kg', 280.00),
+(9, 13, 110.00, 'kg', 250.00),
+(9, 14, 25.00, 'unidad', 72.00),
+(10, 1, 80.00, 'kg', 220.00),
+(10, 3, 130.00, 'kg', 300.00);
+
+SELECT * FROM detalle_compras_proveedor;
+
+INSERT INTO productos_venta (nombre, descripcion, precio_venta, unidad_venta, activo)
+VALUES
+('Bife con guarnición', 'Bife de chorizo acompañado con papas fritas y ensalada', 7000.00, 'unidad', TRUE),
+('Ensalada mixta', 'Lechuga, tomate, zanahoria rallada y huevo duro', 2400.00, 'unidad', TRUE),
+('Milanesa de pollo con puré', 'Milanesa de pechuga de pollo acompañada con puré de papas', 6000.00, 'unidad', TRUE),
+('Sándwich de miga', 'Sándwich frío con jamón, queso y lechuga', 1800.00, 'unidad', TRUE),
+('Café con leche', 'Café expreso con leche vaporizada', 800.00, 'unidad', TRUE),
+('Medialunas x6', 'Seis medialunas frescas para desayuno', 2800.00, 'unidad', TRUE),
+('Postre del día', 'Postre casero preparado diariamente', 2000.00, 'unidad', TRUE),
+('Jugo natural', 'Jugo de fruta natural exprimido', 1200.00, 'unidad', TRUE),
+('Hamburguesa con papas', 'Hamburguesa casera con papas fritas', 7500.00, 'unidad', TRUE),
+('Pizza muzzarella porción', 'Porción individual de pizza de muzzarella', 3500.00, 'unidad', TRUE),
+('Gaseosa 500ml', 'Botella de gaseosa clásica de 500ml', 1500.00, 'unidad', TRUE),
+('Agua mineral 500ml', 'Botella de agua mineral sin gas 500ml', 900.00, 'unidad', TRUE);
+
+INSERT INTO recetas (id_producto_venta, descripcion)
+VALUES
+(1, 'Bife de chorizo a la plancha, acompañado de papas fritas y ensalada mixta (lechuga, tomate, zanahoria)'),
+(2, 'Ensalada fresca con lechuga, tomate, zanahoria rallada y huevo duro en rodajas'),
+(3, 'Milanesa de pechuga de pollo empanada, servida con puré de papas cremoso'),
+(4, 'Sándwich frío de pan de miga con jamón, queso y hojas frescas de lechuga'),
+(5, 'Café expreso servido con leche vaporizada y espuma cremosa'),
+(6, 'Seis medialunas frescas, recién horneadas para acompañar el desayuno'),
+(7, 'Postre casero del día, preparado con ingredientes frescos y de temporada'),
+(8, 'Jugo natural exprimido con frutas frescas según disponibilidad'),
+(9, 'Hamburguesa casera con carne vacuna, lechuga, tomate y papas fritas'),
+(10, 'Porción individual de pizza muzzarella con salsa de tomate y queso fundido'),
+(11, 'Botella de gaseosa clásica de 500ml para acompañar comidas'),
+(12, 'Botella de agua mineral sin gas de 500ml, ideal para refrescarse');
+
+INSERT INTO productos (nombre, unidad_medida, id_proveedor)
+VALUES
+('Leche entera', 'litro', 6),
+('Café molido', 'kg', 4),
+('Queso crema', 'kg', 6),
+('Masa para pizza', 'kg', 3),
+('Gaseosa', 'litro', 11),
+('Agua mineral', 'litro', 11);
+
+INSERT INTO detalle_receta (id_receta, id_producto, cantidad, unidad_medida)
+VALUES
+(1, 15, 0.25, 'kg'),
+(1, 19, 1.00, 'unidad'),
+(1, 2, 0.15, 'unidad'),
+(1, 5, 0.10, 'kg'),
+(2, 2, 1.00, 'unidad'),
+(2, 1, 0.20, 'kg'),
+(2, 6, 0.10, 'kg'),
+(2, 14, 0.05, 'unidad'),
+(3, 16, 0.20, 'kg'),
+(3, 18, 0.15, 'kg'),
+(4, 19, 2.00, 'unidad'),
+(4, 6, 0.10, 'kg'),
+(4, 2, 0.15, 'unidad'),
+(5, 21, 0.25, 'litro'),
+(5, 22, 0.02, 'kg'),
+(6, 20, 6.00, 'unidad'),
+(7, 23, 0.10, 'kg'),
+(7, 3, 0.15, 'kg'),
+(8, 12, 0.30, 'kg'),
+(8, 13, 0.20, 'kg'),
+(9, 17, 0.20, 'kg'),
+(9, 19, 1.00, 'unidad'),
+(9, 2, 0.10, 'unidad'),
+(10, 24, 0.15, 'kg'),
+(10, 25, 0.20, 'kg'),
+(11, 26, 0.50, 'litro'),
+(12, 27, 0.50, 'litro');
