@@ -328,6 +328,34 @@ Define los ingredientes y cantidades que componen cada receta asociada a un prod
     → opcional, hasta 20 caracteres.
 
 
+## Vistas
+
+### Vista 'vista_asistencia_empleados'
+
+Muestra un resumen de la asistencia diaria de los empleados, incluyendo nombre, apellido, hora de ingreso y egreso.
+
+    CREATE VIEW vista_asistencia_empleados AS
+    SELECT e.id_empleado, e.nombre, e.apellido, f.fecha, f.hora_ingreso, f.hora_egreso
+    FROM empleados e
+    JOIN fichajes f ON e.id_empleado = f.id_empleado;
+
+
+## Funciones
+
+
+
+
+## Stored procedures
+
+
+
+
+
+## Triggers
+
+
+
+
 
 
 
@@ -338,6 +366,14 @@ Define los ingredientes y cantidades que componen cada receta asociada a un prod
 [Diagrama Entidad-Relacion ER](./Captura%20de%20pantalla%202025-08-08%20a%20la(s)%2012.40.54.png)
 
 [Inserción de datos](./insert_data.sql)
+
+[Vistas](./vistas.sql)
+
+[Funciones](./funciones.sql)
+
+[Stored procedures](./stored_procedures.sql)
+
+[Triggers](./triggers.sql)
 
 
 ## Contacto
