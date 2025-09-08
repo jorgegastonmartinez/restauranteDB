@@ -328,6 +328,9 @@ Define los ingredientes y cantidades que componen cada receta asociada a un prod
     → opcional, hasta 20 caracteres.
 
 
+
+
+
 ## Índice
 
 [Creación de tablas](./create_table.sql)
