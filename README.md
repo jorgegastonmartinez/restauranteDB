@@ -339,6 +339,79 @@ Muestra un resumen de la asistencia diaria de los empleados, incluyendo nombre, 
     FROM empleados e
     JOIN fichajes f ON e.id_empleado = f.id_empleado;
 
+Consulta
+
+    SELECT * 
+    FROM vista_asistencia_empleados;
+    SELECT nombre, apellido, fecha FROM vista_asistencia_empleados WHERE fecha = CURDATE();
+
+
+### Vista 'vista_inventario_mensual'
+
+Consulta el inventario disponible de productos por mes, junto con el proveedor correspondiente..
+
+    CREATE VIEW vista_inventario_mensual AS
+    SELECT p.nombre AS producto, pr.nombre AS proveedor, i.mes, i.cantidad
+    FROM inventario i
+    JOIN productos p ON i.id_producto = p.id_producto
+    JOIN proveedores pr ON p.id_proveedor = pr.id_proveedor;
+
+Consulta
+
+    SELECT * FROM vista_inventario_mensual;
+    SELECT producto, cantidad FROM vista_inventario_mensual WHERE mes = '2025-06';
+
+### Vista 'vista_ventas_detalladas'
+
+Obtiene un detalle de las ventas realizadas, incluyendo productos vendidos, cantidades, precios y totales.
+
+    CREATE OR REPLACE VIEW vista_ventas_detalladas AS
+    SELECT v.id_venta, v.fecha, v.turno, p.nombre AS producto, pv.cantidad, pv.precio_unitario, 
+       (pv.cantidad * pv.precio_unitario) AS subtotal
+    FROM ventas v
+    JOIN productos_vendidos pv ON v.id_venta = pv.id_venta
+    JOIN productos p ON pv.id_producto = p.id_producto;
+
+Consulta
+
+    SELECT * FROM vista_ventas_detalladas;
+    SELECT fecha, producto, subtotal FROM vista_ventas_detalladas WHERE turno = 'almuerzo';
+
+### Vista 'vista_compras_proveedores'
+
+Muestra todas las compras realizadas a proveedores con su desglose por producto.
+
+    CREATE OR REPLACE VIEW vista_compras_proveedores AS
+    SELECT c.id_compra, c.fecha, pr.nombre AS proveedor, d.cantidad, d.unidad_medida, 
+       d.precio_unitario, (d.cantidad * d.precio_unitario) AS subtotal, p.nombre AS producto
+    FROM compras_proveedor c
+    JOIN detalle_compras_proveedor d ON c.id_compra = d.id_compra
+    JOIN productos p ON d.id_producto = p.id_producto
+    JOIN proveedores pr ON c.id_proveedor = pr.id_proveedor;
+
+Consulta
+
+    SELECT * FROM vista_compras_proveedores;
+    SELECT proveedor, SUM(subtotal) AS total_comprado 
+    FROM vista_compras_proveedores 
+    GROUP BY proveedor;
+
+### Vista 'vista_mermas'
+
+Registra las mermas de productos, indicando fecha, motivo y cantidad perdida.
+
+    CREATE OR REPLACE VIEW vista_mermas AS
+    SELECT m.fecha, p.nombre AS producto, m.cantidad, m.motivo
+    FROM mermas m
+    JOIN productos p ON m.id_producto = p.id_producto;
+
+Consulta
+
+    SELECT * FROM vista_mermas;
+    SELECT producto, SUM(cantidad) AS total_merma 
+    FROM vista_mermas 
+    GROUP BY producto;
+
 
 ## Funciones
 
