@@ -506,19 +506,137 @@ Consulta
     FROM productos p;
 
 
-
 ## Stored procedures
 
+### Stored procedures 'registrar_fichaje'
 
+Automatiza el registro de asistencia, evita tener que escribir la consulta de inserción manual.
 
+    DELIMITER //
 
+    CREATE PROCEDURE registrar_fichaje(IN idEmpleado INT, IN horaEntrada TIME)
+    BEGIN
+        INSERT INTO fichajes (id_empleado, fecha, hora_ingreso)
+        VALUES (idEmpleado, CURDATE(), horaEntrada);
+    END;
+
+    //
+    DELIMITER ;
+
+Llamada
+
+    CALL registrar_fichaje(3, '09:00:00');
+
+### Stored procedures 'cerrar_fichaje'
+
+Permite cerrar el registro de asistencia del día automáticamente.
+
+    DELIMITER //
+
+    CREATE PROCEDURE cerrar_fichaje(IN idEmpleado INT, IN horaSalida TIME)
+    BEGIN
+        UPDATE fichajes
+        SET hora_egreso = horaSalida
+        WHERE id_empleado = idEmpleado
+          AND fecha = CURDATE()
+          AND hora_egreso IS NULL;
+    END;
+
+    //
+    DELIMITER ;
+
+Llamada
+
+    CALL cerrar_fichaje(3, '17:30:00');
+
+### Stored procedures 'registrar_venta'
+
+Centraliza en un procedimiento la lógica de registrar ventas, reduciendo errores.
+
+    DELIMITER //
+
+    CREATE PROCEDURE registrar_venta(IN turnoVenta ENUM('desayuno','almuerzo','merienda'), IN total DECIMAL(10,2))
+    BEGIN
+        INSERT INTO ventas (fecha, turno, total)
+        VALUES (CURDATE(), turnoVenta, total);
+    END;
+
+    //
+    DELIMITER ;
+
+Llamada
+
+    CALL registrar_venta('almuerzo', 15400.50);
+
+### Stored procedures 'reporte_ventas_turno'
+
+Facilita obtener estadísticas de ventas sin armar la query cada vez.
+
+    DELIMITER //
+
+    CREATE PROCEDURE reporte_ventas_turno(IN fechaInicio DATE, IN fechaFin DATE)
+    BEGIN
+        SELECT turno, SUM(total) AS total_turno
+        FROM ventas
+        WHERE fecha BETWEEN fechaInicio AND fechaFin
+        GROUP BY turno;
+    END;
+
+    //
+    DELIMITER ;
+
+Llamada
+
+    CALL reporte_ventas_turno('2025-08-01', '2025-08-08');
 
 ## Triggers
 
+### Trigger 'trg_desactivar_clave'
 
+Cada vez que un empleado se da de baja (activo = FALSE), se borra su clave_acceso automáticamente.
 
+    DELIMITER //
 
+    CREATE TRIGGER trg_desactivar_clave
+    BEFORE UPDATE ON empleados
+    FOR EACH ROW
+    BEGIN
+        IF NEW.activo = FALSE THEN
+            SET NEW.clave_acceso = NULL;
+        END IF;
+    END;
+    //
 
+    DELIMITER ;
+
+Prueba
+
+    UPDATE empleados SET activo = FALSE WHERE id_empleado = 2;
+    SELECT * FROM empleados WHERE id_empleado = 2;
+
+### Trigger 'trg_control_merma_negativa'
+
+Evitar que se inserten mermas con cantidad negativa.
+
+    DELIMITER //
+
+    CREATE TRIGGER trg_control_merma_negativa
+    BEFORE INSERT ON mermas
+    FOR EACH ROW
+    BEGIN
+        IF NEW.cantidad <= 0 THEN
+            SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'Error: la cantidad de merma debe ser mayor que cero';
+        END IF;
+    END;
+
+    //
+    DELIMITER ;
+
+Prueba
+
+    INSERT INTO mermas (id_producto, fecha, cantidad, motivo)
+    VALUES (1, '2025-06-08', -3, 'Error de carga');
 
 
 ## Índice

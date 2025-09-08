@@ -1,6 +1,6 @@
 USE restauranteDB;
 
--- TRIGGER 1: Trigger para desactivar clave de acceso al desactivar un empleado
+-- TRIGGER 1: trg_desactivar_clave
 -- Objetivo: Cada vez que un empleado se da de baja (activo = FALSE), se borra su clave_acceso automáticamente.
 -- Beneficio: Evita que empleados inactivos puedan entrar al sistema.
 -- Tablas: empleados.
