@@ -415,6 +415,95 @@ Consulta
 
 ## Funciones
 
+### Funcion 'calcular_antiguedad_empleado'
+
+Devuelve la cantidad de días trabajados por un empleado desde su fecha de ingreso.
+
+    DELIMITER //
+
+    CREATE FUNCTION calcular_antiguedad_empleado(fecha_ingreso DATE)
+    RETURNS INT
+    DETERMINISTIC
+    BEGIN
+        DECLARE antiguedad INT;
+        SET antiguedad = DATEDIFF(CURDATE(), fecha_ingreso);
+        RETURN antiguedad;
+    END;
+    //
+    DELIMITER ;
+
+Consulta
+
+    SELECT nombre, apellido, calcular_antiguedad_empleado(fecha_ingreso) AS dias_trabajados
+    FROM empleados;
+
+
+### Funcion 'estado_empleado'
+
+Devuelve un texto indicando si un empleado está activo o no.
+
+    DELIMITER //
+
+    CREATE FUNCTION estado_empleado(activo BOOLEAN)
+    RETURNS VARCHAR(20)
+    DETERMINISTIC
+    BEGIN
+        RETURN IF(activo = TRUE, 'Activo', 'Inactivo');
+    END;
+    //
+    DELIMITER ;
+
+Consulta
+
+    SELECT nombre, apellido, estado_empleado(activo) AS estado
+    FROM empleados;
+
+
+### Funcion 'costo_total_compra'
+
+Calcula el costo total de una compra de proveedor multiplicando cantidad × precio unitario.
+
+    DELIMITER //
+
+    CREATE FUNCTION costo_total_compra(cantidad DECIMAL(10,2), precio DECIMAL(10,2))
+    RETURNS DECIMAL(10,2)
+    DETERMINISTIC
+    BEGIN
+        RETURN cantidad * precio;
+    END;
+    //
+    DELIMITER ;
+
+Consulta
+
+    SELECT id_compra, id_producto, costo_total_compra(cantidad, precio_unitario) AS subtotal
+    FROM detalle_compras_proveedor;
+
+### Funcion 'stock_producto_mes'
+
+Devolver la cantidad disponible en inventario de un producto para un mes dado.
+
+    DELIMITER //
+
+    CREATE FUNCTION stock_producto_mes(idProd INT, mesParam VARCHAR(7))
+    RETURNS DECIMAL(10,2)
+    READS SQL DATA
+    BEGIN
+        DECLARE stock DECIMAL(10,2);
+        SELECT cantidad 
+        INTO stock
+        FROM inventario
+        WHERE id_producto = idProd AND mes = mesParam;
+        RETURN IFNULL(stock, 0);
+    END;
+
+    //
+    DELIMITER ;
+
+Consulta
+
+    SELECT p.nombre, stock_producto_mes(p.id_producto, '2025-06') AS stock_septiembre
+    FROM productos p;
 
 
 
