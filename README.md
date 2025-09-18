@@ -2,24 +2,22 @@
 
 RestauranteDB
 
-
 # Autor
 
 Jorge Martinez
 
-
 # Curso
 SQL
 
+# Comisión
+Proyecto final
 
 # Comisión
 81830
 
-
 ## Sobre mi proyecto
 
 Este proyecto tiene como finalidad el diseño y desarrollo de una base de datos relacional orientada a la gestión operativa de un restaurante. Se enfoca en organizar y centralizar información clave vinculada al personal, control de inventario, proveedores y registro de asistencia, permitiendo así una administración más eficiente. A través de un modelo estructurado, se busca reflejar los procesos reales que se dan en la operación diaria del restaurante.
-
 
 ## Objetivo
 
