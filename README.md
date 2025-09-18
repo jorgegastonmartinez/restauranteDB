@@ -9,7 +9,7 @@ Jorge Martinez
 # Curso
 SQL
 
-# Comisión
+# Entrega
 Proyecto final
 
 # Comisión
