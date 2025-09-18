@@ -653,6 +653,8 @@ Prueba
 
 [Triggers](./triggers.sql)
 
+[Gráfico Analítico](./Captura%20de%20pantalla%202025-09-18%20a%20la(s)%2020.45.30.png)
+
 
 ## Contacto
 
