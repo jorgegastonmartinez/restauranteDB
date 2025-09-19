@@ -639,15 +639,17 @@ Prueba
 
 ## Analítico
 
-Análisis de ventas por turno
+Análisis de ventas por turno. 
+
+Surge de la necesidad de resolver una de las situaciones problemáticas planteadas y mas comunes en los restaurantes.
 
 1. Datos utilizados
 
-Se utilizó la vista vista_ventas_detalladas de la base de datos restauranteDB.
+Se utilizó la vista "vista_ventas_detalladas" de la base de datos.
 
 Esta vista combina información de las tablas ventas, productos_vendidos y productos.
 
-Para el análisis se seleccionaron las columnas: fecha, turno y subtotal (cantidad vendida × precio unitario).
+Para el análisis se seleccionaron las columnas: fecha, turno y subtotal.
 
 2. Procedimiento
 
@@ -655,15 +657,15 @@ Se exportaron los datos a la aplicación Numbers de Mac en formato CSV.
 
 Se creó una tabla dinámica con:
 
-Filas: Turno (desayuno, almuerzo, merienda)
+* Filas: Turno (desayuno, almuerzo, merienda)
 
-Valores: Suma de subtotal
+* Valores: Suma de subtotal
 
-Se generó un gráfico de columnas/circular para visualizar claramente la distribución de ventas por turno.
+Se generó un gráfico de circular para visualizar claramente la distribución de ventas por turno.
 
 3. Resultados e interpretación
 
-El gráfico muestra que el turno de desayuno concentra la mayor parte de las ventas, seguido por almuerzo y merienda.
+El gráfico muestra que el turno de desayuno se concentra la mayor parte de las ventas, seguido por almuerzo y merienda.
 
 Esto indica que el restaurante debe priorizar la preparación de platos y la disponibilidad de stock durante el desayuno, optimizando recursos y evitando faltantes.
 
@@ -684,7 +686,6 @@ Esto indica que el restaurante debe priorizar la preparación de platos y la dis
 [Triggers](./triggers.sql)
 
 [Gráfico Analítico](./ventas.png)
-
 
 ## Contacto
 
